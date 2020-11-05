@@ -6,8 +6,8 @@ import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import axios from "axios";
 
-const PUSH_REGISTRATION_ENDPOINT = "http://8f4cd4a4b5c1.ngrok.io/token";
-const MESSAGE_ENPOINT = "http://8f4cd4a4b5c1.ngrok.io/message";
+const PUSH_REGISTRATION_ENDPOINT = "http://3.34.124.216:3000/lunch/token";
+const MESSAGE_ENPOINT = "http://3.34.124.216:3000/lunch/message";
 
 export default function App() {
   const [state, setState] = useState({

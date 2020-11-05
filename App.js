@@ -54,10 +54,13 @@ export default function App() {
     registerForPushNotificationsAsync();
   }, []);
 
+  const getLunch = async() => {
+    const data = await axios.get('http://3.34.124.216:3000/lunch');
+    const res = data.data.match(/[^<p>.*?</p>]/g).join("").match(/[^</1>]/g).join("").match(/[^a-zA-Z!="'오늘의 급식]/g).join("").trim();
+  }
+
   useEffect(() => {
-    axios.get("http://3.34.124.216:3000/lunch")
-    .then(res => res.data.match(/[^<p>.*?</p>]/g).join("").match(/[^</1>]/g).join("").match(/[^a-zA-Z!="'오늘의 급식]/g).join("").trim())
-    .then(res => sendMessage(res))
+    getLunch();
   },[])
 
   return (

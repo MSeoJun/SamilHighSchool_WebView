@@ -6,8 +6,8 @@ import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import axios from "axios";
 
-const PUSH_REGISTRATION_ENDPOINT = "http://3.34.124.216:3000/lunch/token";
-const MESSAGE_ENPOINT = "http://3.34.124.216:3000/lunch/message";
+const PUSH_REGISTRATION_ENDPOINT = "https://6vl35acuq0.execute-api.ap-northeast-2.amazonaws.com/v1/users/token";
+const MESSAGE_ENPOINT = "https://6vl35acuq0.execute-api.ap-northeast-2.amazonaws.com/v1/users/message";
 
 export default function App() {
   const [state, setState] = useState({
@@ -22,7 +22,7 @@ export default function App() {
       return;
     }
     let token = await Notifications.getExpoPushTokenAsync();
-
+    console.log(token);
     return axios.post(PUSH_REGISTRATION_ENDPOINT, {
       token: {
         value: token,
@@ -55,8 +55,9 @@ export default function App() {
   }, []);
 
   const getLunch = async() => {
-    const data = await axios.get('http://3.34.124.216:3000/lunch');
+    const data = await axios.get('https://6vl35acuq0.execute-api.ap-northeast-2.amazonaws.com/v1');
     const res = data.data.match(/[^<p>.*?</p>]/g).join("").match(/[^</1>]/g).join("").match(/[^a-zA-Z!="'오늘의 급식]/g).join("").trim();
+    sendMessage(res)
   }
 
   useEffect(() => {
